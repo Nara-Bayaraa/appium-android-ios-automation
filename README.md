@@ -49,6 +49,7 @@ appium-android-ios-automation/
 - Accessibility ID selectors
 - Reusable test data management
 - CI/CD with GitHub Actions
+- Daily automated smoke tests
 
 ---
 
@@ -72,12 +73,26 @@ Run iOS tests:
 npx wdio run config/wdio.ios.conf.js
 ```
 
+Run smoke tests only:
+
+```bash
+npx wdio run config/wdio.android.conf.js --mochaOpts.grep @smoke
+```
+
 ---
 
 ## CI/CD
 
 Automated with GitHub Actions on every push to master.
 Workflow installs dependencies and executes the test suite.
+
+Smoke tests run automatically every day at 5am Chicago time.
+This simulates a real production health check workflow.
+
+| Trigger | What runs |
+|---------|-----------|
+| Push to master | Full test suite |
+| Daily 5am cron | Smoke tests only |
 
 Note: Mobile emulator tests require a local environment.
 GitHub Actions is configured for dependency validation and future cloud device integration.
@@ -111,6 +126,3 @@ This project is for portfolio and educational purposes.
 ---
 
 **Happy Testing! 🚀**
-
----
-
