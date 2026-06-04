@@ -5,6 +5,8 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  schedule:
+    - cron: '0 11 * * *'
 
 jobs:
   test:
@@ -22,5 +24,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Android tests
-        run: npx wdio run config/wdio.android.conf.js
+      - name: Run smoke tests
+        run: npx wdio run config/wdio.android.conf.js --mochaOpts.grep @smoke
